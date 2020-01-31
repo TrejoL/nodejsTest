@@ -5,11 +5,21 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Luis Trejo",
   "license": "MIT",
   "dependencies": {
-    "countries-list": "^2.5.0"
+    "bcrypt": "^3.0.7",
+    "body-parser": "^1.19.0",
+    "countries-list": "^2.5.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "nodemon": "^2.0.2"
   }
 }
