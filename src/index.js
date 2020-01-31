@@ -1,55 +1,15 @@
-//console.log('Hello World');
-//modulo require('fs') para archivos
-var http = require("http");
-var url = require("url");
-var querystring = require("querystring");
-var { info, error } = require("./modules/my-log");
-var consts = require("./utils/consts");
-var firebase = require("../libs/firebase");
-var { countries } = require("countries-list");
+const express = require('express');
+const bodyParser = require('body-parser');
 
-var server = http.createServer(function(request, response) {
-  var parsed = url.parse(request.url);
-  console.log("parsed:", parsed);
-  var pathname = parsed.pathname;
+const routesv1 = require('./routes/v1');
 
-  var query = querystring.parse(parsed.query);
-  console.log("query",query);
-  if (pathname === "/") {
-    response.writeHead(200, { "Content-Type": "text/html" });
-    response.write("<html><body><H1>Hello World</H1></body></html>");
-    response.end();
-  } else if (pathname === "/exit") {
-    response.writeHead(200, { "Content-Type": "text/html" });
-    response.write("<html><body><H1>Bye</H1></body></html>");
-    response.end();
-  } else if (pathname === "/country") {
-    response.writeHead(200, { "Content-Type": "application/json" });
-    response.write(JSON.stringify(countries[query.code]));
-    response.end();
-  } else if (pathname === "/info") {
-    var result = info(pathname);
-    response.writeHead(200, { "Content-Type": "text/html" });
-    response.write(result);
-    response.end();
-  } else if (pathname === "/error") {
-    var result = error(pathname);
-    response.writeHead(200, { "Content-Type": "text/html" });
-    response.write(result);
-    response.end();
-  } else {
-    response.writeHead(404, { "Content-Type": "text/html" });
-    response.write("<html><body><H1>Not found</H1></body></html>");
-    response.end();
-  }
+const app = express();
+
+// parse application/json
+app.use(bodyParser.json());
+
+routesv1(app);
+
+app.listen(4000, () => {
+  console.log('running on 4000');
 });
-
-server.listen(4000);
-console.log("running on 4000");
-
-//function suma(num1, num2) {
-//  return num1 + num2;
-//}
-
-//var result = suma(2, 6);
-//console.log("la suma es: ", result);

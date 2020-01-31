@@ -1,14 +1,15 @@
-function info(text) {
-  console.log("INFO", text);
+const info = text => {
+  console.log('INFO', text);
   return text;
-}
+};
+// arrow function
+const error = text => {
+  console.log('ERROR', text);
+  return text;
+};
 
-function error(text) {
-  console.log("ERROR", text);
-  return text;
-}
-//exportacion parcial
+// exportacion parcial
 module.exports.info = info;
 module.exports.error = error;
-//exportacion global
-//module.exports = { info, error };
+// exportacion global
+// module.exports = { info, error };
